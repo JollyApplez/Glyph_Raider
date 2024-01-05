@@ -1,0 +1,14 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1704485474
+icon.svg::CompressedTexture2D::6994924534310542550::1704470037::1704470044::1::::<><>::
+::res://Assets/::1704470293
+::res://Enemies/::1704484726
+EnemyBase.gd::GDScript::-1::1704484713::0::1::::<>CharacterBody3D<>::
+enemy_base.tscn::PackedScene::7991120308458770149::1704484726::0::1::::<><>::res://Enemies/EnemyBase.gd
+::res://Game/::1704485405
+main.gd::GDScript::-1::1704473477::0::1::::<>Node3D<>::
+main.tscn::PackedScene::1742528574824872392::1704485405::0::1::::<><>::uid://cpfov18e7upei::::res://Player/player.tscn<>res://Game/main.gd<>uid://dl37t4cc20q8l::::res://Enemies/enemy_base.tscn
+::res://Levels/::1704470298
+::res://Player/::1704484726
+player.gd::GDScript::-1::1704478454::0::1::::<>CharacterBody3D<>::
+player.tscn::PackedScene::5836884867108677548::1704484726::0::1::::<><>::res://Player/player.gd

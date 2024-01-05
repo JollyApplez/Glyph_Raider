@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl37t4cc20q8l"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyBase.gd" id="1_05xxt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_36plb"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qehro"]
+height = 1.0
+
+[node name="EnemyBase" type="CharacterBody3D" groups=["Enemies"]]
+motion_mode = 1
+script = ExtResource("1_05xxt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_36plb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CylinderMesh_qehro")
+
+[node name="Navigation" type="Node3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Navigation"]
+unique_name_in_owner = true
