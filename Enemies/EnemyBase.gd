@@ -18,6 +18,8 @@ var provoked := false
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	
+	if grounded: 
+		motion_mode = CharacterBody3D.MOTION_MODE_GROUNDED
 func _process(_delta: float) -> void:
 	if provoked:
 		print("Provoked")
@@ -27,15 +29,10 @@ func _process(_delta: float) -> void:
 		$Navigation.global_position.y = global_position.y - global_position.y
 func _physics_process(delta: float) -> void:
 	
-	
-	
-	
-	
 	# Add the gravity.
 	if not is_on_floor() and grounded:
 		velocity.y -= gravity * delta
 	
-
 	
 	var distance = global_position.distance_to(player.global_position)
 
@@ -71,3 +68,5 @@ func look_at_target(direction: Vector3):
 	
 func attack():
 	print_debug("Attack")
+	
+

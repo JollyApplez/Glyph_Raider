@@ -6,25 +6,35 @@ const JUMP_VELOCITY := 12
 const GRAVITY_MULT := 2.8
 const DAMPENING_GROUND := 0.6
 const DAMPENING_AIR := 0.025
+#BOB variables
 const BOB_FREQ := 2.0
 const BOB_AMP := 0.08
+#fov variables
+const BASE_FOV = 75.0
+const FOV_CHANGE = 1.5
 
 @export var sensitivity := 0.01
+
+
 var speed 
 var t_bob := 0.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-var has_dashed = false
+var has_dashed := false
+var bullet = preload("res://Player/bullet.tscn")
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
+@onready var barrel = $Head/Camera3D/Gun/RayCast3D
 
 func _ready() -> void:
 	speed = RUN_SPEED
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * sensitivity)
 		camera.rotate_x(-event.relative.y * sensitivity)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
 
 func _physics_process(delta: float) -> void:
@@ -59,8 +69,18 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, DAMPENING_AIR)
 	
 	_head_bob(delta)
-	
+	_fov_manager(delta)
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("shoot"):
+		_shooting()
+
+func _shooting():
+	var b = bullet.instantiate()
+	b.position = barrel.global_position
+	b.transform.basis = barrel.global_transform.basis
+	get_parent().add_child(b)
+
 
 func _head_bob(delta: float):
 	if is_on_floor():
@@ -96,3 +116,9 @@ func _dash_timeout():
 
 func _dash_cooldown_timeout():
 	has_dashed = false
+
+func _fov_manager(delta):
+	# FOV
+	var velocity_clamped = clamp(velocity.length(), 0.5, DASH_SPEED * 2)
+	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
+	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
