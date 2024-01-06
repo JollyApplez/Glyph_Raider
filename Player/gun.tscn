@@ -1,16 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://th47wq61mpn2"]
+[gd_scene load_steps=6 format=3 uid="uid://th47wq61mpn2"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_j3v12"]
-top_radius = 0.2
-bottom_radius = 0.1
-height = 0.6
+[ext_resource type="Texture2D" uid="uid://dl7mryab2l562" path="res://Assets/Textures/muzzle_01.png" id="1_8l2vs"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4scqm"]
+size = Vector2(0.7, 0.7)
+orientation = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmtao"]
+transparency = 1
+albedo_color = Color(0.839216, 0.215686, 0.25098, 1)
+albedo_texture = ExtResource("1_8l2vs")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vujdr"]
+size = Vector3(0.2, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rmt8x"]
+size = Vector3(0.2, 0.3, 0.2)
 
 [node name="Gun" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1, -1.5)
+mesh = SubResource("PlaneMesh_4scqm")
+skeleton = NodePath("../MeshInstance3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_dmtao")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1)
-mesh = SubResource("CylinderMesh_j3v12")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_vujdr")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.8)
+mesh = SubResource("BoxMesh_rmt8x")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)

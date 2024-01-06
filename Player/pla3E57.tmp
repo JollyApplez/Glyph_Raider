@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpfov18e7upei"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_yq03o"]
+[ext_resource type="PackedScene" uid="uid://th47wq61mpn2" path="res://Player/gun.tscn" id="2_ow88l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eac01"]
+height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_skdsb"]
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0pnk0"]
+albedo_color = Color(0.364706, 0.317647, 0.917647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u5kv0"]
+size = Vector3(0.5, 0.2, 0.4)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+axis_lock_angular_z = true
+script = ExtResource("1_yq03o")
+sensitivity = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_eac01")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_skdsb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.5)
+material_override = SubResource("StandardMaterial3D_0pnk0")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_u5kv0")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.4)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="Gun" parent="Head/Camera3D" instance=ExtResource("2_ow88l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, 0.4)

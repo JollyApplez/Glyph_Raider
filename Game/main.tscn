@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://y3dgq3wvxruu"]
+[gd_scene load_steps=12 format=3 uid="uid://y3dgq3wvxruu"]
 
 [ext_resource type="PackedScene" uid="uid://cpfov18e7upei" path="res://Player/player.tscn" id="1_0uojg"]
 [ext_resource type="Script" path="res://Game/main.gd" id="1_vc5r0"]
 [ext_resource type="PackedScene" uid="uid://dl37t4cc20q8l" path="res://Enemies/enemy_base.tscn" id="2_b535d"]
+[ext_resource type="Texture2D" uid="uid://bkqifbk4p0rxj" path="res://Assets/Sky/cloudy_midday_4k.png" id="2_pn2ip"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_liak8"]
-sky_top_color = Color(0.682353, 0.690196, 0.698039, 1)
-sky_horizon_color = Color(0.568627, 0.588235, 0.627451, 1)
+sky_top_color = Color(0.137255, 0.141176, 0.145098, 1)
+sky_horizon_color = Color(0.521569, 0.541176, 0.580392, 1)
+sky_cover = ExtResource("2_pn2ip")
 ground_bottom_color = Color(0.745098, 0.588235, 0.407843, 1)
 ground_horizon_color = Color(0.47451, 0.384314, 0.364706, 1)
 
@@ -16,6 +18,7 @@ radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_7v1nr"]
 background_mode = 2
+background_canvas_max_layer = 1
 sky = SubResource("Sky_sba53")
 tonemap_mode = 2
 glow_enabled = true
@@ -52,10 +55,14 @@ navigation_mesh = SubResource("NavigationMesh_lke68")
 
 [node name="EnemyBase" parent="LevelPrototype/NavigationRegion3D/LevelCharacters" instance=ExtResource("2_b535d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+attack_range = 9.0
+aggro_range = 25.0
 
 [node name="EnemyBase2" parent="LevelPrototype/NavigationRegion3D/LevelCharacters" instance=ExtResource("2_b535d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
+attack_range = 6.0
 grounded = true
+aggro_range = 25.0
 
 [node name="LevelObjects" type="Node3D" parent="LevelPrototype/NavigationRegion3D"]
 
@@ -126,9 +133,19 @@ size = Vector3(60, 1, 36)
 material = SubResource("StandardMaterial3D_rnhjd")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="LevelPrototype/NavigationRegion3D/LevelObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17877, -0.100197, 2.98413)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17877, 3.2998, 4.46826)
 use_collision = true
-size = Vector3(9.35754, 1, 6.96826)
+size = Vector3(9.35754, 0.2, 4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="LevelPrototype/NavigationRegion3D/LevelObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1788, 5.2998, 4.46826)
+use_collision = true
+size = Vector3(9.35754, 0.2, 4)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="LevelPrototype/NavigationRegion3D/LevelObjects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.1788, 5.2998, -6.14551)
+use_collision = true
+size = Vector3(9.35754, 0.2, 3.22754)
 
 [node name="Player" parent="." instance=ExtResource("1_0uojg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

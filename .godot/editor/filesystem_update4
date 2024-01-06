@@ -1,7 +1,13 @@
-res://Enemies/enemy_base.tscn
-res://Enemies/EnemyBase.gd
 res://Game/main.tscn
 res://Player/player.tscn
-res://Player/player.gd
+res://Enemies/enemy_base.tscn
 res://Player/bullet.tscn
+res://Player/player.gd
+res://Player/hud.tscn
+res://Game/main.gd
 res://Player/bullet.gd
+res://Enemies/EnemyBase.gd
+res://Player/hitbox.gd
+res://Player/gun.tscn
+res://Enemies/EnemyBullet.tscn
+res://Enemies/EnemyBullet.gd

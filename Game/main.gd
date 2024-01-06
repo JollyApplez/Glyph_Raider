@@ -11,7 +11,10 @@ func _input(event: InputEvent) -> void:
 	#Quitting the game with Esc
 	if event.is_action_pressed("quit"):
 		get_tree().quit()
-		
+	
+	if event.is_action_pressed("interact"):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
 func _unhandled_input(event: InputEvent) -> void:
 	pass
 	

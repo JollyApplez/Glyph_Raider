@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt1yvh2ulrb4l"]
+
+[ext_resource type="LabelSettings" uid="uid://dttf03u358wk4" path="res://Assets/UI/hud_text_48.tres" id="1_3iaau"]
+[ext_resource type="Texture2D" uid="uid://c6wnndgk18sbe" path="res://icon.svg" id="1_of4bl"]
+[ext_resource type="LabelSettings" uid="uid://cbexmdfrvf8u8" path="res://Assets/UI/hud_text_32.tres" id="2_xvf6x"]
+
+[node name="UI" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+metadata/_edit_use_anchors_ = true
+
+[node name="AmmoLabel" type="Label" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "10/30"
+label_settings = ExtResource("1_3iaau")
+
+[node name="HealthLabel" type="Label" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "HEALTH"
+label_settings = ExtResource("2_xvf6x")
+
+[node name="TimerLabel" type="Label" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Time: 13.24
+"
+label_settings = ExtResource("1_3iaau")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Keystones"
+label_settings = ExtResource("2_xvf6x")
+
+[node name="KeyStoneContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Keystone2" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/KeyStoneContainer"]
+layout_mode = 2
+texture = ExtResource("1_of4bl")
+stretch_mode = 2
+
+[node name="Keystone" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/KeyStoneContainer"]
+layout_mode = 2
+texture = ExtResource("1_of4bl")
+stretch_mode = 2
