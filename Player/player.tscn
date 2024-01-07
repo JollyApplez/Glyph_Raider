@@ -1,9 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpfov18e7upei"]
+[gd_scene load_steps=20 format=3 uid="uid://cpfov18e7upei"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_yq03o"]
+[ext_resource type="Script" path="res://Player/Camera.gd" id="2_2a0ka"]
 [ext_resource type="PackedScene" uid="uid://th47wq61mpn2" path="res://Player/gun.tscn" id="2_ow88l"]
 [ext_resource type="PackedScene" uid="uid://dt1yvh2ulrb4l" path="res://Player/hud.tscn" id="3_r31ga"]
+[ext_resource type="Script" path="res://Player/Grappling.gd" id="3_xyin7"]
 [ext_resource type="Texture2D" uid="uid://b7ekwoich0yxl" path="res://Assets/Textures/crosshair007.png" id="4_43wmh"]
+[ext_resource type="PackedScene" uid="uid://b63ac2oh4fbko" path="res://Player/laser_sound.tscn" id="4_o6wp4"]
+[ext_resource type="Script" path="res://Player/hud.gd" id="5_l3v0i"]
+[ext_resource type="PackedScene" uid="uid://csx2p4exa8vnx" path="res://Player/player_hitbox.tscn" id="6_ux5sx"]
+[ext_resource type="AudioStream" uid="uid://dxixwfgxwjve5" path="res://Assets/Audio/footstep_concrete_000.ogg" id="13_7bes5"]
+[ext_resource type="AudioStream" uid="uid://dph2l5buq0wft" path="res://Assets/Audio/footstep_concrete_001.ogg" id="14_a3loo"]
+[ext_resource type="AudioStream" uid="uid://d84id1m8sx2s" path="res://Assets/Audio/footstep_concrete_002.ogg" id="15_gnq7v"]
+[ext_resource type="AudioStream" uid="uid://dy8n3nmk61wro" path="res://Assets/Audio/footstep_concrete_003.ogg" id="16_03ot5"]
+[ext_resource type="AudioStream" uid="uid://dqf4iqngni8wy" path="res://Assets/Audio/footstep_concrete_004.ogg" id="17_w5f5h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eac01"]
 height = 1.6
@@ -16,6 +26,20 @@ albedo_color = Color(0.364706, 0.317647, 0.917647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5kv0"]
 size = Vector3(0.5, 0.2, 0.4)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t5kkc"]
+playback_mode = 1
+streams_count = 5
+stream_0/stream = ExtResource("13_7bes5")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("14_a3loo")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("15_gnq7v")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("16_03ot5")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("17_w5f5h")
+stream_4/weight = 1.0
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 axis_lock_angular_z = true
@@ -38,21 +62,44 @@ mesh = SubResource("BoxMesh_u5kv0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.4)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+script = ExtResource("2_2a0ka")
 
 [node name="Grappling" type="Node3D" parent="Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0.4)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.1)
+script = ExtResource("3_xyin7")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Head/Camera3D/Grappling"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, -2)
+visible = false
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D/Grappling"]
+target_position = Vector3(0, 0, -4)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Gun" parent="Head/Camera3D" instance=ExtResource("2_ow88l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 2.98023e-08)
+visible = false
 
 [node name="RayCast3D" parent="Head/Camera3D/Gun" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.5)
 
+[node name="ReloadSpeed" type="Timer" parent="Head/Camera3D/Gun"]
+one_shot = true
+
+[node name="AutoReloadSpeed" type="Timer" parent="Head/Camera3D/Gun"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="AttackSpeed" type="Timer" parent="Head/Camera3D/Gun"]
+one_shot = true
+
+[node name="LaserSound" parent="Head/Camera3D/Gun" instance=ExtResource("4_o6wp4")]
+
 [node name="UI" parent="." instance=ExtResource("3_r31ga")]
+script = ExtResource("5_l3v0i")
 
 [node name="Crosshair" type="TextureRect" parent="UI/Control" index="1"]
 layout_mode = 1
@@ -68,6 +115,21 @@ offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_43wmh")
+
+[node name="PlayerHitbox" parent="." instance=ExtResource("6_ux5sx")]
+
+[node name="StepTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="StepSound" type="AudioStreamPlayer3D" parent="StepTimer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.066835, -1.65128)
+stream = SubResource("AudioStreamRandomizer_t5kkc")
+
+[connection signal="timeout" from="Head/Camera3D/Gun/ReloadSpeed" to="." method="_on_reload_speed_timeout"]
+[connection signal="timeout" from="Head/Camera3D/Gun/AutoReloadSpeed" to="." method="_on_auto_reload_speed_timeout"]
+[connection signal="body_part_hit" from="PlayerHitbox" to="." method="_on_player_hitbox_body_part_hit"]
+[connection signal="timeout" from="StepTimer" to="." method="_on_step_timer_timeout"]
 
 [editable path="Head/Camera3D/Gun"]
 [editable path="UI"]

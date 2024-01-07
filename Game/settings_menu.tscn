@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkwj7exx2886v"]
+
+[ext_resource type="Script" path="res://Game/settings_menu.gd" id="1_pr4tx"]
+[ext_resource type="LabelSettings" uid="uid://cbexmdfrvf8u8" path="res://Assets/UI/hud_text_32.tres" id="1_wjqaj"]
+[ext_resource type="AudioStream" uid="uid://dohlgrpqsg3vu" path="res://Assets/Audio/Space Cadet.ogg" id="3_f2gaj"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pr4tx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SensLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Sensitivity
+"
+label_settings = ExtResource("1_wjqaj")
+horizontal_alignment = 1
+
+[node name="SensValueLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Current: 0.0"
+label_settings = ExtResource("1_wjqaj")
+horizontal_alignment = 1
+
+[node name="SenseSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 3.0
+step = 0.1
+value = 0.5
+allow_greater = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Master Volume
+"
+label_settings = ExtResource("1_wjqaj")
+horizontal_alignment = 1
+
+[node name="VolumeValueLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Sound Volume
+"
+label_settings = ExtResource("1_wjqaj")
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_f2gaj")
+autoplay = true
+
+[connection signal="value_changed" from="VBoxContainer/SenseSlider" to="." method="_on_sense_slider_value_changed"]
+[connection signal="changed" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_changed"]
+[connection signal="value_changed" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

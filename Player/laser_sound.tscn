@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://b63ac2oh4fbko"]
+
+[ext_resource type="AudioStream" uid="uid://cgijfxuamno56" path="res://Assets/Audio/laserSmall_000.ogg" id="1_ou1im"]
+[ext_resource type="AudioStream" uid="uid://hl1uh726alv5" path="res://Assets/Audio/laserSmall_001.ogg" id="2_eafjq"]
+[ext_resource type="AudioStream" uid="uid://8m5uonqk0012" path="res://Assets/Audio/laserSmall_002.ogg" id="3_4c58h"]
+[ext_resource type="AudioStream" uid="uid://xwkjiqm75wxl" path="res://Assets/Audio/laserSmall_003.ogg" id="4_wvgev"]
+[ext_resource type="AudioStream" uid="uid://f7sjqo8fhhlh" path="res://Assets/Audio/laserSmall_004.ogg" id="5_wmgrn"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r65b2"]
+playback_mode = 1
+streams_count = 5
+stream_0/stream = ExtResource("1_ou1im")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_eafjq")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_4c58h")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_wvgev")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("5_wmgrn")
+stream_4/weight = 1.0
+
+[node name="LaserSound" type="AudioStreamPlayer3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.033165, -1.25128)
+stream = SubResource("AudioStreamRandomizer_r65b2")

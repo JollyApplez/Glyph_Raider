@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl37t4cc20q8l"]
+[gd_scene load_steps=10 format=3 uid="uid://dl37t4cc20q8l"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyBase.gd" id="1_05xxt"]
-[ext_resource type="PackedScene" uid="uid://d1luy5mvkcdyo" path="res://Player/hitbox.tscn" id="2_bn47n"]
+[ext_resource type="PackedScene" uid="uid://d1luy5mvkcdyo" path="res://Enemies/hitbox.tscn" id="2_7gvel"]
 [ext_resource type="Script" path="res://Player/hitbox.gd" id="3_8v4ug"]
+[ext_resource type="PackedScene" uid="uid://b63ac2oh4fbko" path="res://Player/laser_sound.tscn" id="4_ft4dm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_36plb"]
 height = 1.0
@@ -40,7 +41,7 @@ mesh = SubResource("CylinderMesh_ixnac")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Navigation"]
 unique_name_in_owner = true
 
-[node name="Hitbox" parent="." instance=ExtResource("2_bn47n")]
+[node name="Hitbox" parent="." instance=ExtResource("2_7gvel")]
 script = ExtResource("3_8v4ug")
 
 [node name="Weapon" type="Node3D" parent="."]
@@ -52,7 +53,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Weapon/Barrel"]
 mesh = SubResource("BoxMesh_s4ona")
 
+[node name="LaserSound" parent="Weapon" instance=ExtResource("4_ft4dm")]
+
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="body_part_hit" from="Hitbox" to="." method="_on_hitbox_body_part_hit"]
+
+[editable path="Hitbox"]

@@ -19,6 +19,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player: CharacterBody3D
 var provoked := false
 
+@onready var laser_sound: AudioStreamPlayer3D = $Weapon/LaserSound
 @onready var barrel: Node3D = %Barrel
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var attack_timer: Timer = $AttackTimer
@@ -72,6 +73,7 @@ func _physics_process(delta: float) -> void:
 				ranged_attack()
 			else: 
 				attack()
+			laser_sound.play()
 
 func look_at_target(direction: Vector3):
 	var adjusted_direction = direction

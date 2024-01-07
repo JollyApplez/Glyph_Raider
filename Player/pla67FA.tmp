@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://cpfov18e7upei"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_yq03o"]
+[ext_resource type="Script" path="res://Player/Camera.gd" id="2_2a0ka"]
+[ext_resource type="PackedScene" uid="uid://th47wq61mpn2" path="res://Player/gun.tscn" id="2_ow88l"]
+[ext_resource type="PackedScene" uid="uid://dt1yvh2ulrb4l" path="res://Player/hud.tscn" id="3_r31ga"]
+[ext_resource type="Texture2D" uid="uid://b7ekwoich0yxl" path="res://Assets/Textures/crosshair007.png" id="4_43wmh"]
+[ext_resource type="Script" path="res://Player/hud.gd" id="5_l3v0i"]
+[ext_resource type="PackedScene" uid="uid://csx2p4exa8vnx" path="res://Player/player_hitbox.tscn" id="6_ux5sx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eac01"]
+height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_skdsb"]
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0pnk0"]
+albedo_color = Color(0.364706, 0.317647, 0.917647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u5kv0"]
+size = Vector3(0.5, 0.2, 0.4)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+axis_lock_angular_z = true
+script = ExtResource("1_yq03o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_eac01")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_skdsb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.5)
+material_override = SubResource("StandardMaterial3D_0pnk0")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_u5kv0")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.4)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+script = ExtResource("2_2a0ka")
+
+[node name="Grappling" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0.4)
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Head/Camera3D/Grappling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, -2)
+
+[node name="Gun" parent="Head/Camera3D" instance=ExtResource("2_ow88l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 2.98023e-08)
+
+[node name="RayCast3D" parent="Head/Camera3D/Gun" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.5)
+
+[node name="UI" parent="." instance=ExtResource("3_r31ga")]
+script = ExtResource("5_l3v0i")
+
+[node name="Crosshair" type="TextureRect" parent="UI/Control" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_43wmh")
+
+[node name="PlayerHitbox" parent="." instance=ExtResource("6_ux5sx")]
+
+[connection signal="body_part_hit" from="PlayerHitbox" to="." method="_on_player_hitbox_body_part_hit"]
+
+[editable path="Head/Camera3D/Gun"]
+[editable path="UI"]

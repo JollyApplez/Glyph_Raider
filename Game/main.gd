@@ -5,12 +5,12 @@ extends Node3D
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-
 func _input(event: InputEvent) -> void:
 	
 	#Quitting the game with Esc
 	if event.is_action_pressed("quit"):
-		get_tree().quit()
+		get_tree().change_scene_to_file("res://Game/main_menu.tscn")
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if event.is_action_pressed("interact"):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
