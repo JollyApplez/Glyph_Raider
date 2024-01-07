@@ -1,5 +1,6 @@
 AnimationPlayer
 Node3D
+NavigationRegion3D
 CollisionShape3D
 Area3D
 RayCast3D
@@ -11,5 +12,3 @@ VSeparator
 HSlider
 Label
 VSlider
-VBoxContainer
-Button

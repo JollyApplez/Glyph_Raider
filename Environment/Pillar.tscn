@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://chfhlod2gf1rm"]
+
+[ext_resource type="PackedScene" uid="uid://bb6jl15i2780h" path="res://Assets/Models/Walls/GlyphRaider_Wall_Pillar.glb" id="1_im5rr"]
+
+[node name="GlyphRaider_Wall_Pillar" instance=ExtResource("1_im5rr")]

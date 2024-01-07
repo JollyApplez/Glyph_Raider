@@ -11,13 +11,14 @@ func _ready() -> void:
 	idle()
 
 func idle():
+	animation_player.play("RESET")
 	animation_player.play("idle")
 	isCarried = false
 
 func interactable():
-	animation_player.play("interactable")
+	animation_player.play("Interactable")
 	
-func carried(position: Vector3):
+func carried(pos: Vector3):
 	isCarried = true
-	animation_player.play("carried")
-	global_position = position
+	animation_player.play("Carried")
+	global_position = pos

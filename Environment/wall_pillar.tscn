@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca2xaa6qit34h"]
+
+[ext_resource type="PackedScene" uid="uid://c13gemyylvyog" path="res://Assets/Models/Walls/GlyphRaider_Wall.glb" id="1_wk0py"]
+[ext_resource type="PackedScene" uid="uid://chfhlod2gf1rm" path="res://Environment/Pillar.tscn" id="2_p4g3f"]
+
+[node name="GlyphRaider_Wall" instance=ExtResource("1_wk0py")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Wall" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, 5.3, 0)
+
+[node name="GlyphRaider_Wall_Pillar" parent="." index="1" instance=ExtResource("2_p4g3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)

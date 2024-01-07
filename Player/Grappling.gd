@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 		isCarrying = false
 		target.idle()
 		target = null
+		print("drop")
 
 	if ray.is_colliding():
 		isColliding = true
@@ -24,6 +25,7 @@ func _process(delta: float) -> void:
 		if target.is_in_group("hb_cube"):
 			target = target.get_parent()
 			target.interactable()
+			print("looking")
 			if Input.is_action_just_pressed("pickup"):
 				print("cube: pickup state")
 				ray.enabled = false
