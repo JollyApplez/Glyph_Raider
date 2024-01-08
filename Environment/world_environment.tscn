@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://di4qwr58qwhn2"]
+
+[ext_resource type="Texture2D" uid="uid://bkqifbk4p0rxj" path="res://Assets/Sky/cloudy_midday_4k.png" id="1_mbi5a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_liak8"]
+sky_top_color = Color(0.137255, 0.141176, 0.145098, 1)
+sky_horizon_color = Color(0.521569, 0.541176, 0.580392, 1)
+sky_cover = ExtResource("1_mbi5a")
+ground_bottom_color = Color(0.854902, 0.72549, 0.517647, 1)
+ground_horizon_color = Color(0.47451, 0.384314, 0.364706, 1)
+
+[sub_resource type="Sky" id="Sky_sba53"]
+sky_material = SubResource("ProceduralSkyMaterial_liak8")
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_7v1nr"]
+background_mode = 2
+background_canvas_max_layer = 1
+sky = SubResource("Sky_sba53")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_7v1nr")

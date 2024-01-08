@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://oenr54fokt0k"]
+[gd_scene load_steps=13 format=3 uid="uid://oenr54fokt0k"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_vskvk"]
+[ext_resource type="PackedScene" uid="uid://bgxe17y7l3o3d" path="res://Environment/sun.tscn" id="2_hh7ue"]
+[ext_resource type="PackedScene" uid="uid://bkwj7exx2886v" path="res://Game/settings_menu.tscn" id="2_mvf7m"]
+[ext_resource type="PackedScene" uid="uid://di4qwr58qwhn2" path="res://Environment/world_environment.tscn" id="3_yjqij"]
+[ext_resource type="PackedScene" uid="uid://cwjghi1wvbley" path="res://Environment/floor_15.tscn" id="4_fynxs"]
+[ext_resource type="PackedScene" uid="uid://bk1dymbgi8xlk" path="res://Environment/gate_openable.tscn" id="5_fnsnb"]
+[ext_resource type="PackedScene" uid="uid://chfhlod2gf1rm" path="res://Environment/Pillar.tscn" id="6_5tpj5"]
+[ext_resource type="PackedScene" uid="uid://bah82ia6er0ik" path="res://Environment/wall.tscn" id="7_h6gvk"]
+[ext_resource type="PackedScene" uid="uid://b7f75yteoigpp" path="res://Assets/Models/Props/GlyphRaider_obelisk.glb" id="8_8nfjw"]
+[ext_resource type="PackedScene" uid="uid://dpd78w5l1oast" path="res://Interactables/keystone.tscn" id="9_ilhfy"]
+[ext_resource type="PackedScene" uid="uid://d0xgwtossxyfu" path="res://Interactables/gemaltar.tscn" id="10_6rvgm"]
+[ext_resource type="PackedScene" uid="uid://rcfmtdm25brf" path="res://Interactables/cube_drop.tscn" id="11_ork1a"]
 
 [node name="MainMenu" type="Node3D"]
 script = ExtResource("1_vskvk")
 
-[node name="Control" type="Control" parent="."]
+[node name="MainMenu_UI" type="Control" parent="." groups=["MainMenu"]]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -15,7 +26,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu_UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,23 +40,89 @@ offset_bottom = 89.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Button" parent="Control/VBoxContainer"]
+[node name="Play" type="Button" parent="MainMenu_UI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 action_mode = 0
 text = "Play"
 
-[node name="Settings" type="Button" parent="Control/VBoxContainer"]
+[node name="Settings" type="Button" parent="MainMenu_UI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Settings"
 
-[node name="Quit" type="Button" parent="Control/VBoxContainer"]
+[node name="Quit" type="Button" parent="MainMenu_UI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Quit
 "
 
-[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="SettingsMenu" parent="." instance=ExtResource("2_mvf7m")]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, 0.12941, -0.482963, 0, 0.965926, 0.258819, 0.5, -0.224144, 0.836516, -7, 9, 6)
+
+[node name="DirectionalLight3D" parent="." instance=ExtResource("2_hh7ue")]
+
+[node name="WorldEnvironment" parent="DirectionalLight3D" instance=ExtResource("3_yjqij")]
+
+[node name="BackDrop" type="Node3D" parent="."]
+
+[node name="floor15" parent="BackDrop" instance=ExtResource("4_fynxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -7)
+
+[node name="floor19" parent="BackDrop" instance=ExtResource("4_fynxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 8)
+
+[node name="floor16" parent="BackDrop" instance=ExtResource("4_fynxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, -7)
+
+[node name="floor18" parent="BackDrop" instance=ExtResource("4_fynxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, 8)
+
+[node name="floor17" parent="BackDrop" instance=ExtResource("4_fynxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1, -7)
+
+[node name="Gate_Openable" parent="BackDrop" instance=ExtResource("5_fnsnb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
+
+[node name="GlyphRaider_Wall_Pillar" parent="BackDrop" instance=ExtResource("6_5tpj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -15)
+
+[node name="GlyphRaider_Wall_Pillar2" parent="BackDrop" instance=ExtResource("6_5tpj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -15)
+
+[node name="GlyphRaider_Wall_Pillar3" parent="BackDrop" instance=ExtResource("6_5tpj5")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 21, 0, -13)
+
+[node name="GlyphRaider_Wall_Pillar4" parent="BackDrop" instance=ExtResource("6_5tpj5")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 23, 0, 0)
+
+[node name="GlyphRaider_Wall" parent="BackDrop" instance=ExtResource("7_h6gvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -15)
+
+[node name="GlyphRaider_Wall2" parent="BackDrop" instance=ExtResource("7_h6gvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -15)
+
+[node name="GlyphRaider_Wall3" parent="BackDrop" instance=ExtResource("7_h6gvk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23, 0, -7)
+
+[node name="GlyphRaider_Wall4" parent="BackDrop" instance=ExtResource("7_h6gvk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23, 0, 7)
+
+[node name="GlyphRaider_obelisk" parent="BackDrop" instance=ExtResource("8_8nfjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -3)
+
+[node name="Keystone" parent="BackDrop" instance=ExtResource("9_ilhfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.4, -5)
+
+[node name="Altar" parent="BackDrop" instance=ExtResource("10_6rvgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="Cube_drop" parent="BackDrop" instance=ExtResource("11_ork1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
+
+[connection signal="pressed" from="MainMenu_UI/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MainMenu_UI/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainMenu_UI/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

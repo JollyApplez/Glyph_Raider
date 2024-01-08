@@ -40,7 +40,8 @@ func _on_button_pressed() -> void:
 		hide()
 		get_tree().get_first_node_in_group("PauseMenu").show()
 	else: 
-		get_tree().change_scene_to_file("res://Game/main_menu.tscn")
+		hide()
+		get_tree().get_first_node_in_group("MainMenu").show()
 
 
 func _on_button_2_toggled(toggled_on: bool) -> void:

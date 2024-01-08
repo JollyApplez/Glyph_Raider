@@ -21,4 +21,5 @@ func _on_quit_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://Game/settings_menu.tscn")
+	$MainMenu_UI.hide()
+	$SettingsMenu.show()

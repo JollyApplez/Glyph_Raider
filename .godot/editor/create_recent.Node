@@ -1,9 +1,10 @@
+Node3D
+Camera3D
 Button
 VBoxContainer
 Label
 CollisionShape3D
 Area3D
-Node3D
 TextureRect
 Control
 StaticBody3D
@@ -11,4 +12,3 @@ AnimationPlayer
 NavigationRegion3D
 RayCast3D
 MeshInstance3D
-RigidBody3D
