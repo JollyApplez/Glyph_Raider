@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends Node3D
 
 
 var isCarried := false
@@ -11,7 +11,6 @@ func _ready() -> void:
 	idle()
 
 func idle():
-	animation_player.play("RESET")
 	animation_player.play("idle")
 	isCarried = false
 

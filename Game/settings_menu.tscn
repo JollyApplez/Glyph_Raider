@@ -68,8 +68,21 @@ horizontal_alignment = 1
 [node name="VolumeSlider" type="HSlider" parent="VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
-step = 0.1
-value = 1.0
+step = 0.01
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Toggle Fullscreen
+"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_f2gaj")
@@ -78,3 +91,5 @@ autoplay = true
 [connection signal="value_changed" from="VBoxContainer/SenseSlider" to="." method="_on_sense_slider_value_changed"]
 [connection signal="changed" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_changed"]
 [connection signal="value_changed" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Button2" to="." method="_on_button_2_toggled"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

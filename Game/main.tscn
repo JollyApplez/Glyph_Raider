@@ -1,21 +1,22 @@
-[gd_scene load_steps=21 format=3 uid="uid://y3dgq3wvxruu"]
+[gd_scene load_steps=22 format=3 uid="uid://y3dgq3wvxruu"]
 
 [ext_resource type="PackedScene" uid="uid://cpfov18e7upei" path="res://Player/player.tscn" id="1_0uojg"]
 [ext_resource type="Script" path="res://Game/main.gd" id="1_vc5r0"]
 [ext_resource type="Texture2D" uid="uid://bkqifbk4p0rxj" path="res://Assets/Sky/cloudy_midday_4k.png" id="2_pn2ip"]
-[ext_resource type="PackedScene" uid="uid://d2qv3j2btfvdt" path="res://Levels/level_prototype.tscn" id="3_c0uyn"]
 [ext_resource type="AudioStream" uid="uid://dohlgrpqsg3vu" path="res://Assets/Audio/Space Cadet.ogg" id="5_wcsrv"]
 [ext_resource type="PackedScene" uid="uid://dpd78w5l1oast" path="res://Interactables/keystone.tscn" id="6_822k2"]
-[ext_resource type="PackedScene" uid="uid://b4tfr76j4fdhx" path="res://Assets/Models/Enemies/Alien.glb" id="7_7wp6a"]
-[ext_resource type="PackedScene" uid="uid://dge3n1i8vlmp" path="res://Assets/Models/Enemies/ufo_drone.glb" id="8_hyq3i"]
 [ext_resource type="PackedScene" uid="uid://c13gemyylvyog" path="res://Assets/Models/Walls/GlyphRaider_Wall.glb" id="9_awh0l"]
 [ext_resource type="PackedScene" uid="uid://cwjghi1wvbley" path="res://Environment/floor_15.tscn" id="9_otfsh"]
 [ext_resource type="PackedScene" uid="uid://ca2xaa6qit34h" path="res://Environment/wall_pillar.tscn" id="10_ot2bm"]
 [ext_resource type="PackedScene" uid="uid://bb6jl15i2780h" path="res://Assets/Models/Walls/GlyphRaider_Wall_Pillar.glb" id="10_sonau"]
 [ext_resource type="PackedScene" uid="uid://diqtdqbhdwl2j" path="res://glyph_raider_wall_pillar_45.tscn" id="12_d2nv2"]
+[ext_resource type="PackedScene" uid="uid://b37gwc6dvixor" path="res://Game/pause_menu.tscn" id="15_fcefq"]
 [ext_resource type="PackedScene" uid="uid://d0lwkdpvlhr8s" path="res://Enemies/enemy_drone.tscn" id="15_p7nqy"]
 [ext_resource type="PackedScene" uid="uid://dl37t4cc20q8l" path="res://Enemies/enemy_base.tscn" id="16_5pojt"]
+[ext_resource type="PackedScene" uid="uid://rcfmtdm25brf" path="res://Interactables/cube_drop.tscn" id="16_pux0f"]
+[ext_resource type="PackedScene" uid="uid://bkwj7exx2886v" path="res://Game/settings_menu.tscn" id="16_q3m21"]
 [ext_resource type="PackedScene" uid="uid://bk1dymbgi8xlk" path="res://Environment/gate_openable.tscn" id="16_rovy7"]
+[ext_resource type="PackedScene" uid="uid://d0xgwtossxyfu" path="res://Interactables/gemaltar.tscn" id="17_4s7md"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_liak8"]
 sky_top_color = Color(0.137255, 0.141176, 0.145098, 1)
@@ -50,10 +51,6 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 light_energy = 0.5
 shadow_enabled = true
 
-[node name="LevelPrototype" parent="." instance=ExtResource("3_c0uyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
-visible = false
-
 [node name="Player" parent="." instance=ExtResource("1_0uojg")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 35, 0.9, 0)
 
@@ -63,16 +60,7 @@ volume_db = -20.0
 autoplay = true
 
 [node name="Keystone" parent="." instance=ExtResource("6_822k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.6, 0)
-
-[node name="Alien2" parent="." instance=ExtResource("7_7wp6a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -9)
-
-[node name="Alien3" parent="." instance=ExtResource("7_7wp6a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 1.7, -8.4)
-
-[node name="ufo_drone" parent="." instance=ExtResource("8_hyq3i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 1, -8.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1318, 0.6, 0)
 
 [node name="Room1" type="Node3D" parent="."]
 
@@ -85,6 +73,9 @@ navigation_mesh = SubResource("NavigationMesh_yon0u")
 
 [node name="floor16" parent="Room1/NavigationRegion3D/Floor" instance=ExtResource("9_otfsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -1, 0)
+
+[node name="floor27" parent="Room1/NavigationRegion3D/Floor" instance=ExtResource("9_otfsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -1, 0)
 
 [node name="floor17" parent="Room1/NavigationRegion3D/Floor" instance=ExtResource("9_otfsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -1, 0)
@@ -126,6 +117,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.1, 
 [node name="GlyphRaider_Wall6" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("10_ot2bm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.7, -1, 23.3333)
 
+[node name="GlyphRaider_Wall13" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("10_ot2bm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -23.3, -1, 7.3333)
+
 [node name="GlyphRaider_Wall7" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("10_ot2bm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 23.4, -1, 23.3333)
 
@@ -137,6 +131,12 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 38.2, -1
 
 [node name="GlyphRaider_Wall10" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("10_ot2bm")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 38.2, -1, -7.16667)
+
+[node name="GlyphRaider_Wall11" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("10_ot2bm")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -37.8, -1, 7.63333)
+
+[node name="GlyphRaider_Wall12" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("10_ot2bm")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -37.8, -1, -7.16667)
 
 [node name="GlyphRaider_Wall_Pillar47" parent="Room1/NavigationRegion3D/Walls/North" instance=ExtResource("12_d2nv2")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 36.8, 0, 21.3333)
@@ -154,6 +154,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, -1, -23)
 
 [node name="GlyphRaider_Wall3" parent="Room1/NavigationRegion3D/Walls/South" instance=ExtResource("10_ot2bm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, -1, -23)
+
+[node name="GlyphRaider_Wall6" parent="Room1/NavigationRegion3D/Walls/South" instance=ExtResource("10_ot2bm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.6, -1, -7)
 
 [node name="GlyphRaider_Wall5" parent="Room1/NavigationRegion3D/Walls/South" instance=ExtResource("10_ot2bm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -21.6, -1, -7.7)
@@ -180,8 +183,17 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 0
 [node name="EnemyDrone" parent="Room1" instance=ExtResource("15_p7nqy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, 10)
 
+[node name="EnemyDrone2" parent="Room1" instance=ExtResource("15_p7nqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3, -13)
+
 [node name="EnemyBase" parent="Room1" instance=ExtResource("16_5pojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 15)
+attack_range = 5.0
+grounded = true
+aggro_range = 25.0
+
+[node name="EnemyBase2" parent="Room1" instance=ExtResource("16_5pojt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 15)
 attack_range = 5.0
 grounded = true
 aggro_range = 25.0
@@ -189,3 +201,34 @@ aggro_range = 25.0
 [node name="Gate_Openable" parent="Room1" instance=ExtResource("16_rovy7")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22, 0, 0)
 gate_identifier_num = 1
+room_identifier_num = 1
+req_key_amount = 1
+
+[node name="UI" type="Control" parent="."]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" parent="UI" groups=["PauseMenu"] instance=ExtResource("15_fcefq")]
+process_mode = 2
+visible = false
+layout_mode = 1
+
+[node name="SettingsMenu" parent="UI" groups=["SettingsMenu"] instance=ExtResource("16_q3m21")]
+process_mode = 2
+visible = false
+layout_mode = 1
+
+[node name="Cube_drop" parent="." instance=ExtResource("16_pux0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -15)
+collision_layer = 4
+collision_mask = 4
+room_num = 1
+connected_gate_num = 1
+
+[node name="Altar" parent="." instance=ExtResource("17_4s7md")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.3875, 0, -0.205552)

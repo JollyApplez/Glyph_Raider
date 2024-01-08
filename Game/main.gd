@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var pause_menu: Control = $UI/PauseMenu
 
 
 func _ready() -> void:
@@ -9,12 +10,12 @@ func _input(event: InputEvent) -> void:
 	
 	#Quitting the game with Esc
 	if event.is_action_pressed("quit"):
-		get_tree().change_scene_to_file("res://Game/main_menu.tscn")
+		get_tree().paused = true
+		pause_menu.visible = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
 	if event.is_action_pressed("interact"):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-
+	
 func _unhandled_input(event: InputEvent) -> void:
 	pass
 	

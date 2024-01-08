@@ -39,7 +39,7 @@ text = "Settings"
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-text = "Quit
+text = "Return to Main
 "
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]

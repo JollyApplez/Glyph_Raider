@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://nbpqcf1j2ob8"]
+
+[ext_resource type="Script" path="res://Game/victory.gd" id="1_lflhv"]
+[ext_resource type="FontFile" uid="uid://bmbxhdjy8wyf6" path="res://Assets/UI/base_font48.tres" id="1_u7kdj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ha3oc"]
+line_spacing = 5.0
+font = ExtResource("1_u7kdj")
+font_size = 96
+font_color = Color(0.0392157, 0.576471, 0.372549, 1)
+outline_size = 5
+outline_color = Color(0.254902, 0.254902, 0.254902, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.792157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7n77"]
+line_spacing = 5.0
+font = ExtResource("1_u7kdj")
+font_size = 56
+outline_size = 5
+outline_color = Color(0.254902, 0.254902, 0.254902, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.792157)
+
+[node name="Victory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lflhv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -57.5
+offset_right = 214.0
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Victory" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "VICTORY"
+label_settings = SubResource("LabelSettings_ha3oc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Your Time:
+"
+label_settings = SubResource("LabelSettings_o7n77")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "BACK TO MAIN MENU"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -216,7 +216,6 @@ shadow_mesh = SubResource("ArrayMesh_pw0sl")
 size = Vector3(0.7, 1, 1.3)
 
 [node name="EnemyDrone" instance=ExtResource("1_mpecw")]
-health = 50
 attack_range = 15.0
 aggro_range = 30.0
 attack_speed = 2.0

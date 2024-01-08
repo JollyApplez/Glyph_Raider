@@ -30,6 +30,7 @@ var has_dashed := false
 var dash_timer_running := false
 var hit_shake_period := 0.1
 var hit_shake_magnitude := 0.15
+var can_shoot = true
 
 var bullet = preload("res://Player/bullet.tscn")
 
@@ -108,14 +109,15 @@ func _physics_process(delta: float) -> void:
 		reload_speed_timer.start(reload_speed)
 
 func _shooting() -> void:
-	attack_speed_timer.start(attack_speed)
-	
-	ammo -= 1
-	var b = bullet.instantiate()
-	b.position = barrel.global_position
-	b.transform.basis = barrel.global_transform.basis
-	get_parent().add_child(b)
-	$Head/Camera3D/Gun/LaserSound. play()
+	if can_shoot:
+		attack_speed_timer.start(attack_speed)
+		
+		ammo -= 1
+		var b = bullet.instantiate()
+		b.position = barrel.global_position
+		b.transform.basis = barrel.global_transform.basis
+		get_parent().add_child(b)
+		$Head/Camera3D/Gun/LaserSound. play()
 
 func _head_bob(delta: float) -> void:
 	if is_on_floor():
@@ -169,7 +171,7 @@ func _fov_manager(delta) -> void:
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 
 func die():
-	print_debug("dead")
+	get_tree().change_scene_to_file("res://Game/main_menu.tscn")
 
 func _on_player_hitbox_body_part_hit(dam: Variant) -> void:
 	camera._camera_shake(hit_shake_period, hit_shake_magnitude)
@@ -184,7 +186,8 @@ func _on_auto_reload_speed_timeout() -> void:
 	ammo += 1
 
 func _on_reload_speed_timeout() -> void:
-	ammo = max_ammo
+	if ammo < max_ammo:
+		ammo = max_ammo
 
 
 func _on_step_timer_timeout() -> void:

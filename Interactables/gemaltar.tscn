@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0xgwtossxyfu"]
+
+[ext_resource type="PackedScene" uid="uid://sehyowag85uu" path="res://Assets/Models/Props/GlyphRaider_crystal.glb" id="1_cicur"]
+[ext_resource type="Script" path="res://Interactables/gemaltar.gd" id="1_rf8e1"]
+[ext_resource type="PackedScene" uid="uid://b2fb1dhvep7x1" path="res://Assets/Models/Props/GlyphRaider_crystal_pillar.glb" id="2_71mfd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p7w5d"]
+size = Vector3(10, 10, 10)
+
+[node name="Altar" type="Node3D"]
+script = ExtResource("1_rf8e1")
+
+[node name="GlyphRaider_crystal" parent="." instance=ExtResource("1_cicur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="GlyphRaider_crystal_pillar" parent="." instance=ExtResource("2_71mfd")]
+
+[node name="Victory" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Victory"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72107, 0)
+shape = SubResource("BoxShape3D_p7w5d")
+
+[connection signal="body_entered" from="Victory" to="." method="_on_victory_body_entered"]
