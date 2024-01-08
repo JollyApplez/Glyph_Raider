@@ -98,6 +98,15 @@ shape = SubResource("ConcavePolygonShape3D_aa7m2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_q5opj")
 
+[node name="ActivatedLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 2.5, 0)
+visible = false
+light_color = Color(1, 0.607843, 0.741176, 1)
+light_energy = 100.0
+spot_range = 3.0
+spot_angle = 17.1224
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="child_entered_tree" from="CollisionShape3D" to="." method="_on_collision_shape_3d_child_entered_tree"]
 [connection signal="child_exiting_tree" from="CollisionShape3D" to="." method="_on_collision_shape_3d_child_exiting_tree"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://o3hfqcelx7dg"]
+
+[ext_resource type="Script" path="res://Enemies/SpawnTrigger.gd" id="1_rft4n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xkwbe"]
+size = Vector3(10, 2, 14)
+
+[node name="SpawnTrigger" type="Area3D"]
+script = ExtResource("1_rft4n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xkwbe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="child_entered_tree" from="CollisionShape3D" to="." method="_on_collision_shape_3d_child_entered_tree"]

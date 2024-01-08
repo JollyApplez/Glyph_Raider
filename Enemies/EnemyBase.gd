@@ -20,7 +20,7 @@ var player: CharacterBody3D
 var provoked := false
 
 @onready var laser_sound: AudioStreamPlayer3D = $Weapon/LaserSound
-@onready var barrel: Node3D = %Barrel
+@onready var barrel: Node3D = $Weapon/Barrel
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var attack_timer: Timer = $AttackTimer
 
@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 		navigation_agent_3d.target_position = player.global_position
 	
 	if !grounded:
-		$Navigation.global_position.y = global_position.y - global_position.y
+		$Navigation.global_position.y = 0
 func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
@@ -54,10 +54,8 @@ func _physics_process(delta: float) -> void:
 	if provoked: 
 		var next_positon = navigation_agent_3d.get_next_path_position()
 		var direction = global_position.direction_to(next_positon)
-		
+		look_at_target()
 		if direction:
-			look_at_target(direction)
-
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 	else:
@@ -75,18 +73,19 @@ func _physics_process(delta: float) -> void:
 				attack()
 			laser_sound.play()
 
-func look_at_target(direction: Vector3):
-	var adjusted_direction = direction
+func look_at_target():
+	var adjusted_direction = player.global_position
 	adjusted_direction.y = 0
 	
-	look_at(global_position + adjusted_direction, Vector3.UP, false)
+	look_at(adjusted_direction, Vector3.UP, false)
 	barrel.look_at(player.global_position, Vector3.UP, false)
 	
 func ranged_attack():
 	var b = bullet.instantiate()
-	b.position = barrel.global_position
-	b.transform.basis = barrel.global_transform.basis
 	get_parent().add_child(b)
+	b.global_position = barrel.global_position
+	b.global_transform.basis = barrel.global_transform.basis
+	b = null
 	
 
 func attack():

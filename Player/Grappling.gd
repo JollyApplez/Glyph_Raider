@@ -7,6 +7,7 @@ var target
 var isCarrying := false
 @onready var gun: Node3D = $"../Gun"
 @onready var player: CharacterBody3D = $"../../.."
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if isCarrying and Input.is_action_just_pressed("pickup"):
+		audio_stream_player_3d.play()
 		ray.enabled = true
 		isCarrying = false
 		target.idle()
@@ -34,6 +36,7 @@ func _process(delta: float) -> void:
 				isCarrying = true
 				gun.hide()
 				player.can_shoot = false
+				audio_stream_player_3d.play()
 	else:
 		if target != null and !isCarrying:
 			target.idle()

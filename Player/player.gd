@@ -104,7 +104,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if Input.is_action_pressed("shoot") and reload_speed_timer.is_stopped() and attack_speed_timer.is_stopped():
-		_shooting()
+		if ammo > 0:
+			_shooting()
 	if Input.is_action_just_pressed("reload"):
 		reload_speed_timer.start(reload_speed)
 
@@ -183,7 +184,8 @@ func _on_player_hitbox_body_part_hit(dam: Variant) -> void:
 
 func _on_auto_reload_speed_timeout() -> void:
 	auto_reload_speed.start()
-	ammo += 1
+	if ammo < max_ammo:
+		ammo += 1
 
 func _on_reload_speed_timeout() -> void:
 	if ammo < max_ammo:

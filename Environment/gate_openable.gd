@@ -20,3 +20,9 @@ func on_key_register(room_number: int, gate_number: int):
 	
 		if current_key_amount == req_key_amount:
 			SceneManager.signal_open_gate.emit(gate_identifier_num)
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Open":
+		get_tree().get_first_node_in_group("Nav_reg").rebake()
+		

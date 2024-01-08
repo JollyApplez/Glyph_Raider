@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cpfov18e7upei"]
+[gd_scene load_steps=25 format=3 uid="uid://cpfov18e7upei"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_yq03o"]
 [ext_resource type="Script" path="res://Player/Camera.gd" id="2_2a0ka"]
@@ -7,8 +7,12 @@
 [ext_resource type="Script" path="res://Player/Grappling.gd" id="3_xyin7"]
 [ext_resource type="Texture2D" uid="uid://b7ekwoich0yxl" path="res://Assets/Textures/crosshair007.png" id="4_43wmh"]
 [ext_resource type="PackedScene" uid="uid://b63ac2oh4fbko" path="res://Player/laser_sound.tscn" id="4_o6wp4"]
+[ext_resource type="AudioStream" uid="uid://b3jj35j3x5y1j" path="res://Assets/Audio/confirmation_001.ogg" id="4_w42ho"]
+[ext_resource type="AudioStream" uid="uid://doaexiimlh2nx" path="res://Assets/Audio/confirmation_002.ogg" id="5_4c45m"]
 [ext_resource type="Script" path="res://Player/hud.gd" id="5_l3v0i"]
+[ext_resource type="AudioStream" uid="uid://ihmpq68nsm2y" path="res://Assets/Audio/confirmation_003.ogg" id="6_hnkf7"]
 [ext_resource type="PackedScene" uid="uid://csx2p4exa8vnx" path="res://Player/player_hitbox.tscn" id="6_ux5sx"]
+[ext_resource type="AudioStream" uid="uid://y8bmmp2jhxls" path="res://Assets/Audio/confirmation_004.ogg" id="7_rdiyq"]
 [ext_resource type="AudioStream" uid="uid://dxixwfgxwjve5" path="res://Assets/Audio/footstep_concrete_000.ogg" id="13_7bes5"]
 [ext_resource type="AudioStream" uid="uid://dph2l5buq0wft" path="res://Assets/Audio/footstep_concrete_001.ogg" id="14_a3loo"]
 [ext_resource type="AudioStream" uid="uid://d84id1m8sx2s" path="res://Assets/Audio/footstep_concrete_002.ogg" id="15_gnq7v"]
@@ -26,6 +30,17 @@ albedo_color = Color(0.364706, 0.317647, 0.917647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5kv0"]
 size = Vector3(0.5, 0.2, 0.4)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ygelh"]
+streams_count = 4
+stream_0/stream = ExtResource("4_w42ho")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_4c45m")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_hnkf7")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_rdiyq")
+stream_3/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t5kkc"]
 playback_mode = 1
@@ -77,6 +92,9 @@ target_position = Vector3(0, 0, -4)
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Head/Camera3D/Grappling"]
+stream = SubResource("AudioStreamRandomizer_ygelh")
 
 [node name="Gun" parent="Head/Camera3D" instance=ExtResource("2_ow88l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 2.98023e-08)
