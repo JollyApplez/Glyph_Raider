@@ -22,7 +22,7 @@ func _physics_process(delta):
 		var target = ray.get_collider()
 		if target.is_in_group("Player_HB"):
 			target.hit(damage)
-		await get_tree().create_timer(.6).timeout
+		await get_tree().create_timer(.1).timeout
 		queue_free()
 
 

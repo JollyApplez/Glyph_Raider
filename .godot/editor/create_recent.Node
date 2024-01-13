@@ -1,3 +1,4 @@
+AnimationTree
 SpotLight3D
 AudioStreamPlayer3D
 Marker3D
@@ -11,5 +12,3 @@ VBoxContainer
 Label
 TextureRect
 Control
-StaticBody3D
-AnimationPlayer

@@ -1,7 +1,7 @@
 extends Node
 
 var game_time: float
-var game_is_started = true
+var game_is_started = false
 var player_sensitivity: float
 
 

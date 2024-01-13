@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://th47wq61mpn2"]
+[gd_scene load_steps=8 format=3 uid="uid://th47wq61mpn2"]
 
 [ext_resource type="Texture2D" uid="uid://dl7mryab2l562" path="res://Assets/Textures/muzzle_01.png" id="1_8l2vs"]
+[ext_resource type="Material" uid="uid://bmhy70jbac2y7" path="res://Player/black_metallic.tres" id="2_kphff"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4scqm"]
 size = Vector2(0.7, 0.7)
@@ -12,9 +13,15 @@ albedo_color = Color(0.839216, 0.215686, 0.25098, 1)
 albedo_texture = ExtResource("1_8l2vs")
 
 [sub_resource type="BoxMesh" id="BoxMesh_vujdr"]
+material = ExtResource("2_kphff")
 size = Vector3(0.2, 0.2, 0.5)
 
+[sub_resource type="BoxMesh" id="BoxMesh_e34ka"]
+material = ExtResource("2_kphff")
+size = Vector3(0.02, 0.05, 0.1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_rmt8x"]
+material = ExtResource("2_kphff")
 size = Vector3(0.2, 0.3, 0.2)
 
 [node name="Gun" type="Node3D"]
@@ -27,8 +34,12 @@ skeleton = NodePath("../MeshInstance3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_dmtao")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.950302)
 mesh = SubResource("BoxMesh_vujdr")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.106449, -0.750302)
+mesh = SubResource("BoxMesh_e34ka")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.8)

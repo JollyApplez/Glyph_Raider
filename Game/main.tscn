@@ -294,8 +294,5 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -35, -
 [node name="GlyphRaider_Wall_Pillar" parent="Level1/NavigationRegion3D/Corridoor1" instance=ExtResource("18_xmj2s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, -7)
 
-[node name="EnemyBase" parent="." instance=ExtResource("16_5pojt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 1)
-
 [editable path="Level1/NavigationRegion3D/Room1/SpawnTrigger"]
 [editable path="Level1/NavigationRegion3D/Room1/SpawnTrigger2"]

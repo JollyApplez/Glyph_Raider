@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpfov18e7upei"]
+[gd_scene load_steps=26 format=3 uid="uid://cpfov18e7upei"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_yq03o"]
 [ext_resource type="Script" path="res://Player/Camera.gd" id="2_2a0ka"]
 [ext_resource type="PackedScene" uid="uid://th47wq61mpn2" path="res://Player/gun.tscn" id="2_ow88l"]
+[ext_resource type="Material" uid="uid://bmhy70jbac2y7" path="res://Player/black_metallic.tres" id="2_qrjo5"]
 [ext_resource type="PackedScene" uid="uid://dt1yvh2ulrb4l" path="res://Player/hud.tscn" id="3_r31ga"]
 [ext_resource type="Script" path="res://Player/Grappling.gd" id="3_xyin7"]
 [ext_resource type="Texture2D" uid="uid://b7ekwoich0yxl" path="res://Assets/Textures/crosshair007.png" id="4_43wmh"]
@@ -29,6 +30,7 @@ height = 1.6
 albedo_color = Color(0.364706, 0.317647, 0.917647, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5kv0"]
+material = ExtResource("2_qrjo5")
 size = Vector3(0.5, 0.2, 0.4)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ygelh"]
@@ -99,7 +101,7 @@ stream = SubResource("AudioStreamRandomizer_ygelh")
 [node name="Gun" parent="Head/Camera3D" instance=ExtResource("2_ow88l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 2.98023e-08)
 
-[node name="RayCast3D" parent="Head/Camera3D/Gun" index="3"]
+[node name="RayCast3D" parent="Head/Camera3D/Gun" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1.5)
 
 [node name="ReloadSpeed" type="Timer" parent="Head/Camera3D/Gun"]

@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0lwkdpvlhr8s"]
+[gd_scene load_steps=13 format=3 uid="uid://d0lwkdpvlhr8s"]
 
 [ext_resource type="PackedScene" uid="uid://dl37t4cc20q8l" path="res://Enemies/enemy_base.tscn" id="1_mpecw"]
-[ext_resource type="PackedScene" uid="uid://b4tfr76j4fdhx" path="res://Assets/Models/Enemies/Alien.glb" id="2_70sdm"]
 [ext_resource type="PackedScene" uid="uid://d1luy5mvkcdyo" path="res://Enemies/hitbox.tscn" id="2_faswv"]
 [ext_resource type="Script" path="res://Player/hitbox.gd" id="3_fmgog"]
 
@@ -221,31 +220,20 @@ grounded = false
 aggro_range = 45.0
 attack_speed = 2.0
 
-[node name="Alien" parent="Alien" index="0"]
-visible = false
-
-[node name="Alien2" parent="Alien" index="1" instance=ExtResource("2_70sdm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.74228e-09, 0.7, -0.1)
-
-[node name="ufo_drone" type="Node3D" parent="Alien" index="2"]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 8.74228e-09, 0, -0.1)
-
-[node name="Cockpit" type="MeshInstance3D" parent="Alien/ufo_drone" index="0"]
+[node name="Alien_ufo_drone#Cockpit" type="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1v77n")
 skeleton = NodePath("")
 
-[node name="Turret_Pivot" type="Node3D" parent="Alien/ufo_drone/Cockpit" index="0"]
+[node name="Alien_ufo_drone_Cockpit#Turret_Pivot" type="Node3D" parent="Alien_ufo_drone#Cockpit" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 
-[node name="Turrets" type="MeshInstance3D" parent="Alien/ufo_drone/Cockpit/Turret_Pivot" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+[node name="Alien_ufo_drone_Cockpit_Turret_Pivot#Turrets" type="MeshInstance3D" parent="Alien_ufo_drone#Cockpit/Alien_ufo_drone_Cockpit#Turret_Pivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 mesh = SubResource("ArrayMesh_pd6h0")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="HitboxGun1" parent="." index="3" instance=ExtResource("2_faswv")]
+[node name="HitboxGun1" parent="." index="1" instance=ExtResource("2_faswv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 script = ExtResource("3_fmgog")
 
@@ -253,13 +241,16 @@ script = ExtResource("3_fmgog")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.8, -0.0500001)
 shape = SubResource("BoxShape3D_fb4c1")
 
-[node name="HitboxGun2" parent="." index="4" instance=ExtResource("2_faswv")]
+[node name="HitboxGun2" parent="." index="2" instance=ExtResource("2_faswv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 0)
 script = ExtResource("3_fmgog")
 
 [node name="CollisionShape3D" parent="HitboxGun2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.8, -0.0500001)
 shape = SubResource("BoxShape3D_fb4c1")
+
+[node name="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, -0.1)
@@ -269,9 +260,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.7)
 
 [node name="Barrel" parent="Weapon" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999999, -0.2)
+visible = false
 
 [node name="MeshInstance3D" parent="Weapon/Barrel" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="Alien_anim" parent="." index="8"]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 0, 0.7, 0)
 
 [connection signal="body_part_hit" from="HitboxGun1" to="." method="_on_hitbox_body_part_hit"]
 [connection signal="body_part_hit" from="HitboxGun2" to="." method="_on_hitbox_body_part_hit"]
